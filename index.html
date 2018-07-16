@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Queue</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        max-height: 100vh;
+        max-width: 100vw;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+      .top {
+        padding: 0.5rem;
+        background: #EEE;
+        border-bottom: 1px solid #CCC;
+        display: flex;
+      }
+      .top .input {
+        font-size: 1rem;
+        padding: 0.5rem;
+        outline: none;
+        flex: 1;
+      }
+      .top .submit {
+        font-size: 1rem;
+        padding: 0.5rem 1rem;
+        border: 1px solid #CCC;
+        border-left: 0;
+        outline: 0;
+        background: #35ccc5;
+        color: white;
+      }
+      .list {
+        flex: 1;
+      }
+      .item {
+        padding: 1rem;
+        font-size: 2rem;
+        display: flex;
+        border-bottom: 1px solid #DDD;
+      }
+      .item span {
+        flex: 1;
+      }
+      .item button {
+        background: red;
+        font-size: 1rem;
+        color: white;
+        border-radius: 4px;
+        border: 0;
+        box-shadow: 0px 0px 9px -1px rgba(0,0,0,0.5);
+        outline: 0;
+        padding: 0.5rem 1rem;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="top">
+      <input class="input" placeholder="Name">
+      <button class="submit">Submit</button>
+    </div>
+    <div class="list">
+
+    </div>
+    <script>
+      const input = document.querySelector('.input');
+      const button = document.querySelector('.submit');
+      const list = document.querySelector('.list');
+      input.addEventListener('keypress', (e) => {
+        if (e.which === 13) {
+          addItem();
+        }
+      });
+      button.addEventListener('click', () => {
+        addItem();
+      });
+
+      function addItem(name) {
+        if (!input.value) return;
+        const rootEl = document.createElement('div');
+        const nameEl = document.createElement('span');
+        const removeEl = document.createElement('button');
+        rootEl.classList.add('item');
+        removeEl.innerHTML = 'x';
+        nameEl.innerHTML = input.value;
+        input.value = '';
+        removeEl.addEventListener('click', () => {
+          rootEl.remove();
+        });
+
+        rootEl.appendChild(nameEl);
+        rootEl.appendChild(removeEl);
+
+        list.appendChild(rootEl);
+      }
+    </script>
+  </body>
+</html>
